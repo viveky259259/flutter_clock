@@ -84,6 +84,8 @@ class _HandPainter extends CustomPainter {
       ..strokeCap = StrokeCap.square;
 
     canvas.drawLine(center, position, linePaint);
+    canvas.drawCircle(center, 5, Paint()..color=color);
+    canvas.drawCircle(center, 4, Paint()..color=Colors.white);
   }
 
   @override
