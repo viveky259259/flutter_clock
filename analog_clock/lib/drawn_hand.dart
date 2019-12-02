@@ -39,6 +39,17 @@ class DrawnHand extends Hand {
   Widget build(BuildContext context) {
     return Center(
       child: SizedBox.expand(
+//        child: Stack(
+//          fit: StackFit.expand,
+//          children: <Widget>[
+//            Container(
+//              width: 200,
+//              height: 200,
+//              decoration: BoxDecoration(
+////                color: Colors.white38,
+////                  boxShadow: [BoxShadow(offset: Offset(-1, -1))]
+//                  ),
+//            ),
         child: CustomPaint(
           painter: _HandPainter(
             handSize: size,
@@ -46,6 +57,8 @@ class DrawnHand extends Hand {
             angleRadians: angleRadians,
             color: color,
           ),
+//            ),
+//          ],
         ),
       ),
     );
@@ -81,11 +94,16 @@ class _HandPainter extends CustomPainter {
     final linePaint = Paint()
       ..color = color
       ..strokeWidth = lineWidth
-      ..strokeCap = StrokeCap.square;
+      ..strokeCap = StrokeCap.round
+      ..blendMode = BlendMode.multiply;
 
     canvas.drawLine(center, position, linePaint);
-    canvas.drawCircle(center, 5, Paint()..color=color);
-    canvas.drawCircle(center, 4, Paint()..color=Colors.white);
+    canvas.drawCircle(center, 5, Paint()..color = color);
+//    canvas.restore();
+
+    canvas.drawCircle(center, 4, Paint()..color = Colors.white);
+
+//    canvas.drawColor(Color(), BlendMode.clear);
   }
 
   @override
