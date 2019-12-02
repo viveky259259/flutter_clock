@@ -230,22 +230,17 @@ class _AnalogClockState extends State<AnalogClock> {
                 size: 0.5,
                 angleRadians: _now.minute * radiansPerTick,
               ),
-
               DrawnHand(
                 color: customTheme.accentColor,
                 thickness: 12,
                 size: 0.4,
                 angleRadians: _now.hour * radiansPerHour,
               ),
-
-              AnimatedContainer(
-                duration: Duration(milliseconds: 1),
-                child: DrawnHand(
-                  color: Colors.red.shade900,
-                  thickness: 3,
-                  size: 0.6,
-                  angleRadians: _now.second * radiansPerTick,
-                ),
+              DrawnHand(
+                color: Colors.red.shade900,
+                thickness: 3,
+                size: 0.6,
+                angleRadians: _now.second * radiansPerTick,
               ),
 //            getMillisList(customTheme),
               Align(
