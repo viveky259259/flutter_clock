@@ -167,7 +167,9 @@ class _AnalogClockState extends State<AnalogClock> {
         decoration: BoxDecoration(
           image: DecorationImage(
               image: AssetImage(
-                "assets/bg1.jpg",
+                Theme.of(context).brightness == Brightness.light
+                    ? "assets/bg1.jpg"
+                    : "assets/nightbg.jpg",
               ),
               fit: BoxFit.cover),
         ),
@@ -189,7 +191,9 @@ class _AnalogClockState extends State<AnalogClock> {
                     height: constraints.maxHeight * 0.75,
                     width: constraints.maxHeight * 0.75,
                     decoration: BoxDecoration(
-//                        color: Colors.white,
+                        color: Theme.of(context).brightness == Brightness.light
+                            ? Colors.white24
+                            : Colors.white24,
                         borderRadius: BorderRadius.all(Radius.circular(150))),
                   ),
                 ),
@@ -202,7 +206,9 @@ class _AnalogClockState extends State<AnalogClock> {
                   gradient: LinearGradient(
                       end: Alignment.bottomCenter,
                       begin: Alignment.topCenter,
-                      colors: [Colors.blue, Colors.blue.shade900]),
+                      colors: Theme.of(context).brightness == Brightness.light
+                          ? [Colors.green.shade200, Colors.brown]
+                          : [Colors.purpleAccent, Colors.purple.shade900]),
                   child: SizedBox(
                     height: constraints.maxHeight * 0.75,
                     width: constraints.maxHeight * 0.75,
@@ -217,7 +223,9 @@ class _AnalogClockState extends State<AnalogClock> {
                 ),
               ),
               DrawnHand(
-                color: Colors.blue.shade900,
+                color: Theme.of(context).brightness == Brightness.light
+                    ? Colors.green.shade900
+                    : Colors.blue.shade900,
                 thickness: 12,
                 size: 0.5,
                 angleRadians: _now.minute * radiansPerTick,
@@ -227,7 +235,7 @@ class _AnalogClockState extends State<AnalogClock> {
                 color: customTheme.accentColor,
                 thickness: 12,
                 size: 0.4,
-                angleRadians: _now.hour * radiansPerTick,
+                angleRadians: _now.hour * radiansPerHour,
               ),
 
               AnimatedContainer(
@@ -240,16 +248,24 @@ class _AnalogClockState extends State<AnalogClock> {
                 ),
               ),
 //            getMillisList(customTheme),
-//            Align(
-//              alignment: Alignment.bottomCenter,
-//              child: Padding(
-//                padding: const EdgeInsets.all(24.0),
-//                child: Text(
-//                  "${getNumberInString(_now.hour)}:${getNumberInString(_now.minute)}",
-//                  style: TextStyle(fontSize: 24),
-//                ),
-//              ),
-//            ),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.black12,
+                      borderRadius: BorderRadius.all(Radius.circular(8))),
+                  padding: const EdgeInsets.all(24.0),
+                  child: Text(
+                    "${getNumberInString(_now.hour)}:${getNumberInString(_now.minute)}",
+                    style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).brightness == Brightness.light
+                            ? Colors.black
+                            : Colors.white),
+                  ),
+                ),
+              ),
 
               Positioned(
                 left: 0,
