@@ -164,6 +164,13 @@ class _AnalogClockState extends State<AnalogClock> {
       ),
       child: Container(
 //        color: Colors.white,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage(
+                "assets/bg1.jpg",
+              ),
+              fit: BoxFit.cover),
+        ),
         child: LayoutBuilder(builder: (context, constraints) {
           return Stack(
             children: [
@@ -175,9 +182,23 @@ class _AnalogClockState extends State<AnalogClock> {
 //              angleRadians: _now.millisecond * radiansPerTick,
 //            ),
               Center(
+                child: FittedBox(
+                  fit: BoxFit.fitHeight,
+                  child: Container(
+//                    duration: Duration(milliseconds: 1),
+                    height: constraints.maxHeight * 0.75,
+                    width: constraints.maxHeight * 0.75,
+                    decoration: BoxDecoration(
+//                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(150))),
+                  ),
+                ),
+              ),
+              Center(
                 child: UnicornOutlineButton(
                   strokeWidth: 12,
                   radius: 150,
+
                   gradient: LinearGradient(
                       end: Alignment.bottomCenter,
                       begin: Alignment.topCenter,
@@ -188,15 +209,15 @@ class _AnalogClockState extends State<AnalogClock> {
                   ),
                   onPressed: () {},
 
-//                height: constraints.maxHeight * 0.75,
-//                width: constraints.maxHeight * 0.75,
-//                decoration: BoxDecoration(
-//                    border: Border.all(color: Colors.blue, width: 8),
-//                    borderRadius: BorderRadius.all(Radius.circular(150))),
+                  //                height: constraints.maxHeight * 0.75,
+                  //                width: constraints.maxHeight * 0.75,
+                  //                decoration: BoxDecoration(
+                  //                    border: Border.all(color: Colors.blue, width: 8),
+                  //                    borderRadius: BorderRadius.all(Radius.circular(150))),
                 ),
               ),
               DrawnHand(
-                color: Colors.lightBlue.shade900,
+                color: Colors.blue.shade900,
                 thickness: 12,
                 size: 0.5,
                 angleRadians: _now.minute * radiansPerTick,
@@ -377,6 +398,7 @@ class _GradientPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     // create outer rectangle equals size
+
     Rect outerRect = Offset.zero & size;
     var outerRRect =
         RRect.fromRectAndRadius(outerRect, Radius.circular(radius));
